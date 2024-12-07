@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import AppLayoutHeader from "./AppLayoutHeader.vue";
 </script>
 
