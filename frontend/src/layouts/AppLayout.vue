@@ -1,11 +1,31 @@
 <script setup>
 import AppLayoutHeader from "./AppLayoutHeader.vue";
+import AppLayoutSidebar from "./AppLayoutSidebar.vue";
+
+const props = defineProps({
+  tasks: {
+    type: Array,
+    required: true,
+  },
+  filters: {
+    type: Object,
+    required: true,
+  },
+});
+
+defineEmits(["updateTasks"]);
 </script>
 
 <template>
   <div class="app_layout">
     <AppLayoutHeader />
-    <slot />
+    <div class="content">
+      <AppLayoutSidebar
+        :tasks="props.tasks"
+        @update-tasks="$emit('updateTasks', $event)"
+      />
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -14,5 +34,10 @@ import AppLayoutHeader from "./AppLayoutHeader.vue";
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
 }
 </style>
