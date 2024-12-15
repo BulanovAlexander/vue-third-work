@@ -41,6 +41,7 @@ function deleteColumn(id) {
 <template>
   <main class="content">
     <section class="desk">
+      <RouterView :tasks="props.tasks" />
       <!--      Шапка доски-->
       <div class="desk__header">
         <h1 class="desk__title">Design Coffee Lab</h1>
