@@ -1,9 +1,9 @@
 <script setup>
 import { reactive, computed } from "vue";
 import { AppLayout } from "@/layouts";
-import { HomeView } from "@/views";
 import { normalizeTask } from "./common/helpers";
 import tasks from "./mocks/tasks.json";
+import { RouterView } from "vue-router";
 
 const state = reactive({
   tasks: tasks.map((task) => normalizeTask(task)),
@@ -83,7 +83,7 @@ function applyFilters({ item, entity }) {
     :filters="state.filters"
     @update-tasks="updateTasks"
   >
-    <HomeView
+    <RouterView
       :tasks="filteredTasks"
       :filters="state.filters"
       @update-tasks="updateTasks"
