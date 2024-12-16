@@ -287,7 +287,7 @@ function submit() {
       <!--      Блок тегов-->
       <div class="task-card__block">
         <!--        Компонент создания тегов-->
-        <TaskCardCreatorTags :tags="task.tags" @setTags="setTags" />
+        <TaskCardCreatorTags :tags="task.tags" @set-tags="setTags" />
       </div>
 
       <!--      Блок сохранения и отмены изменений-->
