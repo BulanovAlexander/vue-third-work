@@ -98,6 +98,21 @@ function applyFilters({ item, entity }) {
     state.filters[entity] = resultValues;
   }
 }
+
+function editTask(task) {
+  const index = state.tasks.findIndex(({ id }) => task.id === id);
+  if (~index) {
+    const newTask = normalizeTask(task);
+    if (newTask.userId) {
+      newTask.user = { ...getTaskUserById(newTask.userId) };
+    }
+    state.tasks.splice(index, 1, newTask);
+  }
+}
+
+function deleteTask(id) {
+  state.tasks = state.tasks.filter((task) => task.id !== id);
+}
 </script>
 
 <template>
@@ -112,6 +127,8 @@ function applyFilters({ item, entity }) {
       @add-task="addTask"
       @update-tasks="updateTasks"
       @apply-filters="applyFilters"
+      @edit-task="editTask"
+      @delete-task="deleteTask"
     />
   </AppLayout>
 </template>
