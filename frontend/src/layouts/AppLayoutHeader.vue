@@ -19,7 +19,9 @@
       <button type="submit">Найти</button>
     </form>
     <!--    Кнопка создания новой задачи-->
-    <a href="#" class="header__create-task">Создать карточку</a>
+    <RouterLink to="/tasks/create" class="header__create-task"
+      >Создать карточку</RouterLink
+    >
     <!--    Аватар пользователя-->
     <a href="#" class="header__user">
       <img
