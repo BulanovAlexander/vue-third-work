@@ -56,7 +56,6 @@ const addCommentToList = function (comment) {
   >
     <section class="task-card__wrapper">
       <!--Закрытие задачи-->
-      <!--Закрытие задачи-->
       <button class="task-card__close" type="button" @click="closeDialog" />
 
       <!--Шапка задачи-->
