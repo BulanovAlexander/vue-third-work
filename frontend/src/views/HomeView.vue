@@ -18,7 +18,13 @@ const props = defineProps({
   },
 });
 
-defineEmits(["applyFilters", "updateTasks"]);
+defineEmits([
+  "applyFilters",
+  "updateTasks",
+  "addTask",
+  "editTask",
+  "deleteTask",
+]);
 
 const state = reactive({ columns });
 
@@ -41,7 +47,12 @@ function deleteColumn(id) {
 <template>
   <main class="content">
     <section class="desk">
-      <RouterView :tasks="props.tasks" />
+      <RouterView
+        :tasks="props.tasks"
+        @add-task="$emit('addTask', $event)"
+        @edit-task="$emit('editTask', $event)"
+        @delete-task="$emit('deleteTask', $event)"
+      />
       <!--      Шапка доски-->
       <div class="desk__header">
         <h1 class="desk__title">Design Coffee Lab</h1>

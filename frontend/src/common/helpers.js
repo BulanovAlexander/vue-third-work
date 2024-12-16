@@ -11,6 +11,18 @@ import {
 import timeStatuses from "./enums/timeStatuses";
 import taskStatuses from "./enums/taskStatuses";
 
+export const createUUIDv4 = () => {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
+export const createNewDate = () => {
+  return new Date(new Date().setHours(23, 59, 59, 999));
+};
+
 export const getReadableDate = (date) => {
   if (isNaN(Date.parse(date))) return "";
   const newDate = new Date(date);
