@@ -1,38 +1,33 @@
 <script setup>
+import { computed, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { ref, computed, onMounted } from "vue";
-import { useTaskCardDate } from "../common/composables";
 import { getReadableDate, getImage } from "../common/helpers";
-
-import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
+import { useTaskCardDate } from "../common/composables";
 import TaskCardViewTicksList from "../modules/tasks/components/TaskCardViewTicksList.vue";
+import TaskCardTags from "../modules/tasks/components/TaskCardTags.vue";
 import TaskCardViewComments from "../modules/tasks/components/TaskCardViewComments.vue";
+import { useTasksStore } from "@/stores";
 
-// Передадим все задачи в компонент
-const props = defineProps({
-  tasks: {
-    type: Array,
-    required: true,
-  },
+const tasksStore = useTasksStore();
+
+const router = useRouter();
+const route = useRoute();
+
+const dialog = ref(null);
+
+onMounted(() => {
+  // Фокусируем на диалоговом окне чтобы сработала клавиша esc без дополнительного клика на окне
+  dialog.value.focus();
+});
+
+// Найдем задачу по id из массива задач
+const task = computed(() => {
+  return tasksStore.tasks.find((task) => task.id == route.params.id);
 });
 
 const dueDate = computed(() => {
   return getReadableDate(task.value.dueDate || "");
 });
-
-const task = computed(() => {
-  return props.tasks.find((task) => task.id == route.params.id);
-});
-
-const dialog = ref(null);
-
-onMounted(() => {
-  // Фокусируемся на диалоговом окне, чтобы сработала клавиша Esc без дополнительного клика на окне
-  dialog.value.focus();
-});
-
-const router = useRouter();
-const route = useRoute();
 
 const closeDialog = function () {
   router.push("/");
@@ -57,7 +52,6 @@ const addCommentToList = function (comment) {
     <section class="task-card__wrapper">
       <!--Закрытие задачи-->
       <button class="task-card__close" type="button" @click="closeDialog" />
-
       <!--Шапка задачи-->
       <div class="task-card__block">
         <div class="task-card__row">
@@ -78,7 +72,6 @@ const addCommentToList = function (comment) {
             Редактировать задачу
           </a>
         </div>
-
         <!--Дата создания задачи-->
         <p class="task-card__date">
           {{ useTaskCardDate(task) }}
@@ -106,7 +99,6 @@ const addCommentToList = function (comment) {
           </li>
         </ul>
       </div>
-
       <!--Описание задачи-->
       <div class="task-card__block">
         <div v-if="task && task.description" class="task-card__description">
@@ -124,8 +116,7 @@ const addCommentToList = function (comment) {
           </a>
         </div>
       </div>
-
-      <!--Чек-лист-->
+      <!--Чеклист-->
       <div
         v-if="task && task.ticks && task.ticks.length"
         class="task-card__block"
@@ -140,7 +131,6 @@ const addCommentToList = function (comment) {
         <h4 class="task-card__title">Метки</h4>
         <TaskCardTags :tags="task.tags" />
       </div>
-
       <!--Комментарии-->
       <TaskCardViewComments
         v-if="task"

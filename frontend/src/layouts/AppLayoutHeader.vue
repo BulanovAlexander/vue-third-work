@@ -1,21 +1,36 @@
-<script setup></script>
+<script setup>
+import { useFiltersStore } from "@/stores";
+
+const filtersStore = useFiltersStore();
+</script>
 
 <template>
   <header class="header">
     <!--    Логотип-->
     <div class="header__logo">
-      <a href="#" class="logo">
+      <RouterLink to="/" class="logo">
         <img
           src="@/assets/img/logo.svg"
           alt="VueWork logo"
           width="147"
           height="23"
         />
-      </a>
+      </RouterLink>
     </div>
     <!--    Поиск-->
     <form action="#" class="header__search">
-      <input type="search" name="search" required placeholder="Поиск" />
+      <input
+        type="search"
+        name="search"
+        required
+        placeholder="Поиск"
+        @input="
+          filtersStore.applyFilters({
+            item: $event.target.value,
+            entity: 'search',
+          })
+        "
+      />
       <button type="submit">Найти</button>
     </form>
     <!--    Кнопка создания новой задачи-->
