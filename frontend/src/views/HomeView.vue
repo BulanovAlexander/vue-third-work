@@ -1,7 +1,7 @@
 <script setup>
 import { STATUSES } from "../common/constants";
 import DeskColumn from "@/modules/columns/components/DeskColumn.vue";
-import { getImage } from "../common/helpers";
+import { getPublicImage } from "../common/helpers";
 import { useUsersStore, useColumnsStore, useFiltersStore } from "@/stores";
 
 // Определяем хранилища
@@ -42,7 +42,7 @@ const filtersStore = useFiltersStore();
               >
                 <a class="user-filter__button">
                   <img
-                    :src="getImage(user.avatar)"
+                    :src="getPublicImage(user.avatar)"
                     alt="Аватар юзера"
                     width="24"
                     height="24"
