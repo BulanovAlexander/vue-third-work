@@ -11,6 +11,11 @@ import {
 import timeStatuses from "./enums/timeStatuses";
 import taskStatuses from "./enums/taskStatuses";
 
+export const getPublicImage = (path) => {
+  const publicUrl = "/api";
+  return `${publicUrl}/${path}`;
+};
+
 export const createUUIDv4 = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0,
