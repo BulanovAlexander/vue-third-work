@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <button>-</button>
+  <div>
+    <button>-</button>
 
-        <span> Current value: 0 </span>
+    <span> Current value: 0 </span>
 
-        <button>+</button>
-    </div>
+    <button>+</button>
+  </div>
 </template>
